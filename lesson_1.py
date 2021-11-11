@@ -29,7 +29,7 @@ a = 1
 
 
 def f(b):
-    len = lambda a: a*2
+    # len = lambda a: a*2
     a = a + 2
 
     # def f1():
@@ -48,12 +48,12 @@ def f(b):
     # print(id(b))
 
 
-f(a)
-print(a)
-f(a)
-print(a)
-f(a)
-print(a)
+# f(a)
+# print(a)
+# f(a)
+# print(a)
+# f(a)
+# print(a)
 
 
 class A:
@@ -63,14 +63,7 @@ class A:
 _a = A()
 _b = A()
 
-
-
 _a.v = 2
-
-import json
-
-json.dumps()
-
 
 # print(a)
 
@@ -107,6 +100,10 @@ json.dumps()
 # frozenset
 # complex
 # None
+
+a = 10
+print(f'value: {a} {a} {a}')
+print('value: ' + str(a) + str(a) + str(a))
 
 
 
