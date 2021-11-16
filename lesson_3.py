@@ -116,20 +116,63 @@ class Dog(Animal):
 
 # CatDog, Dog, Cat, Animal
 
+# class Meta(type):
+#     def mro(cls):
+#         return (cls, Dog, Cat, Animal, object)
+
+
+
+def sound_raw(self):
+    print('CatDog')
+    super(CatDog, self).sound()
+
+def init_raw(self):
+    self.value1 = 11
+
+
 class Meta(type):
-    def mro(cls):
-        return (cls, Dog, Cat, Animal, object)
+    def __new__(cls, class_name, parents, attrs, value1):
+        mod_attr = {}
+        for key, val in attrs.items():
+            mod_attr[key] = val
+            if not key.startswith('__'):
+                mod_attr[key.upper()] = val
+        mod_attr['value'] = value1
+        print(mod_attr)
+        return super().__new__(cls, class_name, parents, mod_attr)
 
 
-class CatDog(Cat, Dog, metaclass=Meta):
+# CatDog = Meta('CatDog', (Cat, Dog), {'sound': sound_raw, 'value': 10, '__init__': init_raw})
+
+class CatDog(Cat, Dog, metaclass=Meta, value1=10):
     def sound(self):
         print('CatDog')
         super().sound()
 
 
-CatDog().sound()
+class PigHorse(Cat, Dog, metaclass=Meta, value1=20):
+    def sound(self):
+        print('PigHorse')
+        super().sound()
+
+catdog = CatDog()
+catdog.sound()
+print('>>>>')
+catdog.SOUND()
+# catdog.value1 = 11
+# print(CatDog.__dict__)
+print('>>>>')
+print(catdog.value)
+
+print('>>>>')
+pighorse = PigHorse()
+pighorse.SOUND()
+print('>>>>')
+print(pighorse.value)
+
+
+# print(catdog.__dict__)
+# print(catdog.value1)
+
 # print('>>>>>')
 # Cat().sound()
-
-
-('test' + str(i) for i in range(10))
